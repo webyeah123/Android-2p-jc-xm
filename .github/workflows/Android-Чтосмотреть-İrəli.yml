@@ -2,7 +2,7 @@ name: Android-jingcai-转发
 on:
   workflow_dispatch:
   schedule:
-    - cron: 35 2,5,12 * * *
+    - cron: 15 2,5,12 * * *
   watch:
     types: started
   repository_dispatch:
