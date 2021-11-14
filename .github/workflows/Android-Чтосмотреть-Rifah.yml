@@ -2,7 +2,7 @@ name: Android-jingcai-福利
 on:
   workflow_dispatch:
   schedule:
-    - cron: 35 13 * * *
+    - cron: 15 13 * * *
   watch:
     types: started
   repository_dispatch:
