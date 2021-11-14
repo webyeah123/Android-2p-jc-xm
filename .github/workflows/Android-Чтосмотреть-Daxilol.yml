@@ -2,7 +2,7 @@ name: Android-jingcai-签到
 on:
   workflow_dispatch:
   schedule:
-    - cron: 15 18,19 * * *
+    - cron: 18 18,19 * * *
   watch:
     types: started
   repository_dispatch:
