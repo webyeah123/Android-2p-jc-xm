@@ -1,0 +1,43 @@
+name: Android-jingcai-签到
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 15 18,19 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        qdbody: ${{ secrets.QDBODY }}
+        qdbody2: ${{ secrets.QDBODY2 }}
+        qdbody3: ${{ secrets.QDBODY3 }}
+        qdbody4: ${{ secrets.QDBODY4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jcqd】'
+        if: env.qdbody
+        run: |
+          node jcqd.js
+        env:
+          qdbody: ${{ secrets.QDBODY }}
+          
+
+      - name: '运行 【jcqd二】'
+        if: env.qdbody2
+        run: |
+          node jcqd.js
+        env:
+          qdbody: ${{ secrets.QDBODY2 }}
+         

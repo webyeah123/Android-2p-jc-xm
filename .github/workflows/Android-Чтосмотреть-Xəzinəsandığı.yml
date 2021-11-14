@@ -1,0 +1,45 @@
+
+name: Android-jingcai-宝箱
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 15 14 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        jcboxbody: ${{ secrets.JCBOXBODY }}
+        jcboxbody2: ${{ secrets.JCBOXBODY2 }}
+        jcboxbody3: ${{ secrets.JCBOXBODY3 }}
+        jcboxbody4: ${{ secrets.JCBOXBODY4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jcbox】'
+        if: env.jcboxbody
+        run: |
+          node jcbox.js
+        env:
+          jcboxbody: ${{ secrets.JCBOXBODY }}
+          
+
+      - name: '运行 【jcbox二】'
+        if: env.jcboxbody2
+        run: |
+          node jcbox.js
+        env:
+          jcboxbody: ${{ secrets.JCBOXBODY2 }}
+
+      

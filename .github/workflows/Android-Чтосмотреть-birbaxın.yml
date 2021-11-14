@@ -1,0 +1,59 @@
+name: Android-jingcai-看看
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 14 6,12 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        lookStartbody: ${{ secrets.LOOKSTARTBODY }}
+        lookStartbody2: ${{ secrets.LOOKSTARTBODY2 }}
+        lookStartbody3: ${{ secrets.LOOKSTARTBODY3 }}
+        lookStartbody4: ${{ secrets.LOOKSTARTBODY4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jckkz】'
+        if: env.lookStartbody
+        run: |
+          node jckkz.js
+        env:
+          lookStartbody: ${{ secrets.LOOKSTARTBODY }} ${{ secrets.LOOKSTARTBODY11 }} ${{ secrets.LOOKSTARTBODY12 }}
+          jc_cookie: ${{ secrets.JC_COOKIE }}
+
+      - name: '运行 【jckkz二】'
+        if: env.lookStartbody2
+        run: |
+          node jckkz.js
+        env:
+          lookStartbody: ${{ secrets.LOOKSTARTBODY2 }}
+          jc_cookie: ${{ secrets.JC_COOKIE }}
+
+      - name: '运行 【jckkz三】'
+        if: env.lookStartbody3
+        run: |
+          node jckkz.js
+        env:
+          lookStartbody: ${{ secrets.LOOKSTARTBODY3 }} ${{ secrets.LOOKSTARTBODY31 }} ${{ secrets.LOOKSTARTBODY32 }}
+          jc_cookie: ${{ secrets.JC_COOKIE2 }}
+
+      - name: '运行 【jckkz四】'
+        if: env.lookStartbody4
+        run: |
+          node jckkz.js
+        env:
+          lookStartbody: ${{ secrets.LOOKSTARTBODY4 }} ${{ secrets.LOOKSTARTBODY41 }} ${{ secrets.LOOKSTARTBODY42 }}
+          jc_cookie: ${{ secrets.JC_COOKIE2 }}

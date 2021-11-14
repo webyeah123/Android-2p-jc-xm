@@ -1,0 +1,44 @@
+name: Android-jingcai-阅读文章
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 43 22 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        wzbody: ${{ secrets.WZBODY }}
+        wzbody2: ${{ secrets.WZBODY2 }}
+        wzbody3: ${{ secrets.WZBODY3 }}
+        wzbody4: ${{ secrets.WZBODY4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jcwz】'
+        if: env.wzbody
+        run: |
+          node jcwz.js
+        env:
+          wzbody: ${{ secrets.WZBODY }} ${{ secrets.WZBODY11 }}
+          jc_timebody: ${{ secrets.JC_TIMEBODY }}
+
+      - name: '运行 【jcwz二】'
+        if: env.wzbody2
+        run: |
+          node jcwz.js
+        env:
+          wzbody: ${{ secrets.WZBODY2 }} ${{ secrets.WZBODY21 }}
+          jc_timebody: ${{ secrets.JC_TIMEBODY2 }}
+

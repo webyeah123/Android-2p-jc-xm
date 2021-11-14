@@ -1,0 +1,42 @@
+name: Android-jingcai-好友
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 15 2,5,10 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        jc_cookie: ${{ secrets.JC_COOKIE }}
+        jc_cookie2: ${{ secrets.JC_COOKIE2 }}
+        jc_cookie3: ${{ secrets.JC_COOKIE3 }}
+        jc_cookie4: ${{ secrets.JC_COOKIE4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jc_friendSign】'
+        if: env.jc_cookie
+        run: |
+          node jc_friendSign.js
+        env:
+          jc_cookie: ${{ secrets.JC_COOKIE }}
+
+      - name: '运行 【jc_friendSign二】'
+        if: env.jc_cookie2
+        run: |
+          node jc_friendSign.js
+        env:
+          jc_cookie: ${{ secrets.JC_COOKIE2 }}
+

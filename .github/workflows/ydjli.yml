@@ -1,0 +1,43 @@
+name: Android-jingcai-阅读奖励
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 35 13,15 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        jcerciboxbody: ${{ secrets.JCERCIBOXBODY }}
+        jcerciboxbody2: ${{ secrets.JCERCIBOXBODY2 }}
+        jcerciboxbody3: ${{ secrets.JCERCIBOXBODY3 }}
+        jcerciboxbody4: ${{ secrets.JCERCIBOXBODY4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jc_5_60】'
+        if: env.jcerciboxbody
+        run: |
+          node jc_5_60.js
+        env:
+          jcerciboxbody: ${{ secrets.JCERCIBOXBODY }}
+          
+  
+      - name: '运行 【jc_5_60二】'
+        if: env.jcerciboxbody2
+        run: |
+          node jc_5_60.js
+        env:
+          jcerciboxbody: ${{ secrets.JCERCIBOXBODY2 }}
+        

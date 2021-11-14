@@ -1,0 +1,43 @@
+name: Android-jingcai-提现
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 15 13,15 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        jc_withdraw: ${{ secrets.JC_WITHDRAW }}
+        jc_withdraw2: ${{ secrets.JC_WITHDRAW2 }}
+        jc_withdraw3: ${{ secrets.JC_WITHDRAW3 }}
+        jc_withdraw4: ${{ secrets.JC_WITHDRAW4 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jc_withdraw】'
+        if: env.jc_withdraw
+        run: |
+          node jc_withdraw.js
+        env:
+          jc_withdraw: ${{ secrets.JC_WITHDRAW }}
+          jc_cookie: ${{ secrets.JC_COOKIE }}
+  
+      - name: '运行 【jc_withdraw二】'
+        if: env.jc_withdraw2
+        run: |
+          node jc_withdraw.js
+        env:
+          jc_withdraw: ${{ secrets.JC_WITHDRAW2 }}
+          jc_cookie: ${{ secrets.JC_COOKIE2 }}
