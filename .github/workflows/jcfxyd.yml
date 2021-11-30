@@ -29,4 +29,11 @@ jobs:
         run: |
           node jc_shareRead.js
         env:
-          jc_cookie: ${{ secrets.JC_COOKIE }} ${{ secrets.JC_COOKIE2 }}
+          jc_cookie: ${{ secrets.JC_COOKIE }}
+         
+      - name: '运行 【jc_shareRead二】'
+        if: env.jc_cookie2
+        run: |
+          node jc_shareRead.js
+        env:
+          jc_cookie: ${{ secrets.JC_COOKIE2 }}
