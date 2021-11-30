@@ -1,18 +1,3 @@
-/*
-webye
-
-软件名称：晶彩看点
-赞赏:邀请码54870223
-
-万分感谢！！
-
-[rewrite_local]
-
-#看看赚
-https://ant.xunsl.com/v5/nameless/adlickstart.json 重写目标 https://raw.githubusercontent.com/webye/js_scripts/main/jckkz.js
-[MITM]
-hostname = ant.xunsl.com
-*/
 const $ = new Env("晶彩看点看看赚");
 const notify = $.isNode() ? require('./sendNotify') : '';
 message = ""
@@ -135,7 +120,7 @@ if (!lookStartbody) {
             }
 
 
-function openbox(id,jc_cookie1,timeout=0) {
+function openbox(id,jc_cookie1,timeout=120000) {
     return new Promise((resolve) => {
         let url = {
             url : 'https://ant.xunsl.com/WebApi/Nameless/getBoxReward?id='+ id + '&' + jc_cookie1,
@@ -195,7 +180,7 @@ if ($request.url.match(/\/ant.xunsl.com\/v5\/nameless\/adlickstart/)) {
 
   }
 //看看赚激活
-function lookStart(timeout = 0) {
+function lookStart(timeout = 120000) {
     return new Promise((resolve) => {
         let url = {
             url : 'https://ant.xunsl.com/v5/nameless/adlickstart.json',
@@ -223,7 +208,7 @@ function lookStart(timeout = 0) {
 
                 }else{
                     console.log('\n激活看看赚任务失败')
-                  
+
                     console.log("该看看赚任务已自动删除")
                 }
             } catch (e) {
@@ -234,7 +219,7 @@ function lookStart(timeout = 0) {
     })
 }
 //看看赚阅读
-function lookstart(timeout = 0) {
+function lookstart(timeout = 120000) {
     return new Promise((resolve) => {
         let url = {
             url : 'https://ant.xunsl.com/v5/nameless/bannerstatus.json',
@@ -258,7 +243,7 @@ function lookstart(timeout = 0) {
     })
 }
 //看看赚奖励
-function reward(timeout = 0) {
+function reward(timeout = 120000) {
     return new Promise((resolve) => {
         let url = {
             url : 'https://ant.xunsl.com/v5/nameless/adlickend.json',
