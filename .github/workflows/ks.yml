@@ -1,0 +1,39 @@
+name: Android-Чтосмотреть-快手阅读
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 59 6,7,8,9,10,11,12,13,14,15,16,17,18,19 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        kshd: ${{ secrets.KSHD }}
+        kshd2: ${{ secrets.KSHD2 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【ks_js】'
+        if: env.kshd
+        run: |
+          node ks_js.js
+        env:
+          kshd: ${{ secrets.KSHD }}
+         
+      - name: '运行 【ks_js二】'
+        if: env.kshd2
+        run: |
+          node ks_js.js
+        env:
+          kshd: ${{ secrets.KSHD2 }}
