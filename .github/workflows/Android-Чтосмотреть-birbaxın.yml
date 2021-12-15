@@ -39,7 +39,7 @@ jobs:
         run: |
           node jckkz.js
         env:
-          lookStartbody: ${{ secrets.LOOKSTARTBODY2 }}
+          lookStartbody: ${{ secrets.LOOKSTARTBODY2 }} ${{ secrets.LOOKSTARTBODY21 }}
           jc_cookie: ${{ secrets.JC_COOKIE }}
 
       - name: '运行 【jckkz三】'
