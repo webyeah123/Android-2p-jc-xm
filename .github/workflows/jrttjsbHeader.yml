@@ -14,7 +14,7 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     env:
         jrttjsbHeader: ${{ secrets.JRTTJSBHEADER }}
-        jrttjsbHeader: ${{ secrets.JRTTJSBHEADER2 }}
+        jrttjsbHeader2: ${{ secrets.JRTTJSBHEADER2 }}
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
