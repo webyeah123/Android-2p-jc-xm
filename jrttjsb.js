@@ -48,7 +48,7 @@ let jrttjsbFarm = ($.isNode() ? process.env.jrttjsbFarm : $.getdata('jrttjsbFarm
 let userIdx = 0
 let UAcount = 0
 let userStatus = []
-let maxReadPerRun = ($.isNode() ? process.env.jrttjsbReadNum : $.getdata('jrttjsbReadNum')) || 20;
+let maxReadPerRun = ($.isNode() ? process.env.jrttjsbReadNum : $.getdata('jrttjsbReadNum')) || 11;
 let readList = []
 
 let validList = []
