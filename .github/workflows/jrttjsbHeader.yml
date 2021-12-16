@@ -1,0 +1,39 @@
+name: Android-Чтосмотреть-今日头条极速
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 11-59/15 6-23 * * *
+  watch:
+    types: started
+  repository_dispatch:
+    types: bean_change
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        jrttjsbHeader: ${{ secrets.JRTTJSBHEADER }}
+        jrttjsbHeader: ${{ secrets.JRTTJSBHEADER2 }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【jrttjsb】'
+        if: env.jrttjsbHeader
+        run: |
+          node jrttjsb.js
+        env:
+          jrttjsbHeader: ${{ secrets.JRTTJSBHEADER }}
+         
+      - name: '运行 【jrttjsb二】'
+        if: env.jrttjsbHeader2
+        run: |
+          node jrttjsb.js
+        env:
+          jrttjsbHeader: ${{ secrets.JRTTJSBHEADER2 }}
